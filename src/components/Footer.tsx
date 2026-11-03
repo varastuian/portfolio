@@ -1,5 +1,5 @@
 import { PORTFOLIO_DATA } from '../data/portfolioData';
-import { ArrowUp, Compass, Download } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 
 export const Footer = () => {
@@ -10,34 +10,21 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="py-12 bg-[#050609] border-t border-white/[0.08] text-slate-400 text-xs font-mono relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Main Footer Row */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/[0.06]">
+    <footer className="py-10 bg-[#07080b] border-t border-slate-800/80 text-xs text-slate-400 font-mono">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           
-          {/* Brand & Identity */}
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#0e111a] border border-amber-500/30 flex items-center justify-center text-amber-400">
-              <Compass className="w-4 h-4" />
-            </div>
-            <div>
-              <div className="font-heading font-bold text-white text-sm tracking-wide">
-                {personal.name.toUpperCase()} // {personal.alias.toUpperCase()}
-              </div>
-              <div className="text-[11px] text-slate-400">
-                {personal.title} · {personal.domain}
-              </div>
-            </div>
+          <div>
+            &copy; {new Date().getFullYear()} {personal.name}. Hosted on{' '}
+            <span className="text-slate-200">{personal.domain}</span>.
           </div>
 
-          {/* Social Links & Back to Top */}
           <div className="flex items-center gap-4">
             <a
               href={personal.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-[#0e111a] hover:bg-[#161a28] text-slate-400 hover:text-white border border-white/[0.06] transition-colors"
+              className="text-slate-400 hover:text-white transition-colors"
               title="GitHub"
             >
               <GithubIcon className="w-4 h-4" />
@@ -47,7 +34,7 @@ export const Footer = () => {
               href={personal.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-[#0e111a] hover:bg-[#161a28] text-slate-400 hover:text-white border border-white/[0.06] transition-colors"
+              className="text-slate-400 hover:text-white transition-colors"
               title="LinkedIn"
             >
               <LinkedinIcon className="w-4 h-4" />
@@ -56,36 +43,21 @@ export const Footer = () => {
             <a
               href={personal.cvPath}
               download="Vahid-Arastuian-CV.pdf"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0e111a] hover:bg-[#161a28] text-slate-300 hover:text-amber-400 border border-white/[0.06] transition-colors"
-              title="Download Master CV"
+              className="text-slate-300 hover:text-amber-400 transition-colors"
             >
-              <Download className="w-3.5 h-3.5" />
-              <span>CV [PDF]</span>
+              Resume [PDF]
             </a>
 
             <button
               onClick={scrollToTop}
-              className="p-2 rounded-lg bg-[#0e111a] hover:bg-[#161a28] text-slate-400 hover:text-white border border-white/[0.06] transition-colors"
+              className="p-1.5 rounded bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 transition-colors"
               title="Back to Top"
             >
-              <ArrowUp className="w-4 h-4" />
+              <ArrowUp className="w-3.5 h-3.5" />
             </button>
           </div>
 
         </div>
-
-        {/* Bottom Coordinates & Copyright */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400">
-          <div>
-            &copy; {new Date().getFullYear()} {personal.name} ({personal.alias}). Hosted at{' '}
-            <span className="text-slate-300">{personal.domain}</span>.
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            <span>DATUM: WGS84 · 35°41'N 51°24'E · UNIV. OF TEHRAN</span>
-          </div>
-        </div>
-
       </div>
     </footer>
   );
