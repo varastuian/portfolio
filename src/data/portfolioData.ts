@@ -1,214 +1,93 @@
 export interface Project {
-  id: string;
   title: string;
-  subtitle: string;
-  category: 'vision' | 'photogrammetry' | 'geospatial';
-  categoryLabel: string;
+  context: string;
+  metric?: string;
   image: string;
-  imageCaption: string;
-  hardware?: string;
-  metric: string;
-  overview: string;
-  problem: string;
-  methodology: string;
-  results: string[];
-  techStack: string[];
-  publicationOrContext?: string;
+  description: string;
+  tags: string[];
+  link?: string;
 }
 
-export interface ExperienceItem {
+export interface Experience {
   role: string;
   company: string;
   period: string;
   location: string;
-  type: string;
-  summary: string;
-  points: string[];
-  technologies: string[];
+  description: string;
+  highlights: string[];
 }
 
-export interface PublicationItem {
+export interface Publication {
   title: string;
   venue: string;
   year: string;
-  type: 'Paper' | 'Patent' | 'Thesis';
+  type: string;
   description: string;
-  authors: string;
-  status: string;
-  link?: string;
 }
 
-export interface ReferenceItem {
-  name: string;
-  title: string;
-  institution: string;
-  email: string;
-  relation: string;
-}
-
-export const PORTFOLIO_DATA = {
-  personal: {
-    name: "Vahid Arastuian",
-    alias: "Varistotle",
-    domain: "varistotle.ir",
-    title: "Applied Geospatial & Computer Vision Engineer",
-    secondaryTitle: "Photogrammetry M.Sc. | University of Tehran",
-    email: "varastuian@gmail.com",
-    github: "https://github.com/varastuian",
-    linkedin: "https://linkedin.com/in/varastuian",
-    location: "Tehran, Iran",
-    availability: "Available for Full-time Roles · Open to International Relocation & Remote",
-    cvPath: "/Vahid-Arastuian-CV.pdf",
-    aboutParagraphs: [
-      "I am an Applied Geospatial and Computer Vision Engineer with an M.Sc. in Photogrammetry from the University of Tehran. My work sits at the intersection of spatial sensors, multi-view geometry, and deep learning perception systems.",
-      "Over the past six years, I have engineered end-to-end production pipelines ranging from industrial UAV 3D mapping and stockpile volumetrics, to real-time optical flow video stabilization on embedded NVIDIA Jetson platforms, and multi-temporal pavement distress segmentation using YOLOv8.",
-      "I focus on building reliable software systems that operate on noisy, high-volume spatial data in real-world environments—from raw sensor acquisition (PPK/RTK GNSS, LiDAR, UAV RGB cameras) to low-latency edge inference and distributed WebGIS visualization."
-    ],
-  },
-
-  skillsCategories: [
-    {
-      title: "Computer Vision & Deep Learning",
-      skills: ["PyTorch", "YOLO (v5/v8/v11)", "OpenCV (C++/Python)", "CNNs & Transformers", "Temporal Change Detection", "CUDA & TensorRT", "Optical Flow", "Feature Extraction (SIFT/ORB)"]
-    },
-    {
-      title: "Photogrammetry & Geospatial",
-      skills: ["SfM / MVS 3D Reconstruction", "Dense Point Clouds (CloudCompare)", "QGIS & ArcGIS Pro", "GDAL, Rasterio & Shapely", "GNSS PPK / RTK (RTKLIB)", "Google Earth Engine", "Agisoft Metashape", "LiDAR DEM Processing"]
-    },
-    {
-      title: "Embedded, Systems & Video",
-      skills: ["C / C++", "Python", "NVIDIA Jetson (Nano / Xavier)", "Raspberry Pi & Sensor Interfacing", "ROS & MAVLink", "FFmpeg & GStreamer", "RTSP Video Streaming", "Linux / Bash Scripting"]
-    },
-    {
-      title: "WebGIS & Backend Engineering",
-      skills: ["PostgreSQL / PostGIS", "FastAPI & Node.js", "Java Spring Boot", "WebSockets & Real-time Streaming", "Docker Containerization", "Redis", "Leaflet & Mapbox GL", "Git & Agile / Jira"]
-    }
+export const PORTFOLIO = {
+  name: "Vahid Arastuian",
+  domain: "varistotle.ir",
+  title: "Applied Geospatial & Computer Vision Engineer",
+  email: "varastuian@gmail.com",
+  github: "https://github.com/varastuian",
+  linkedin: "https://linkedin.com/in/varastuian",
+  location: "Tehran, Iran",
+  status: "Open to international relocation & remote roles",
+  cvPath: "/Vahid-Arastuian-CV.pdf",
+  bio: [
+    "I am an Applied Geospatial and Computer Vision Engineer with an M.Sc. in Photogrammetry from the University of Tehran. My work focuses on multi-view geometry, UAV photogrammetry, and deploying deep learning perception models on real-world spatial sensor data.",
+    "Over the past six years, I have built and deployed UAV 3D mapping pipelines, real-time video stabilization on NVIDIA Jetson edge hardware, automated pavement distress segmentation (YOLOv8), and spatio-temporal satellite forecasting models."
   ],
 
   projects: [
     {
-      id: "pavement-change-detection",
-      title: "Deep Learning Pavement Distress & Multi-Temporal Change Detection",
-      subtitle: "M.Sc. Thesis at University of Tehran: Automated road infrastructure monitoring from low-altitude drone imagery.",
-      category: "vision",
-      categoryLabel: "Computer Vision & AI",
+      title: "Automatic Road Pavement Distress & Change Detection",
+      context: "M.Sc. Thesis · University of Tehran",
+      metric: "94.2% mAP@50",
       image: "/images/mask.jpg",
-      imageCaption: "Automated crack instance segmentation mask generated by fine-tuned YOLOv8 model.",
-      hardware: "NVIDIA RTX 3090 / Custom UAV Payload",
-      metric: "94.2% mAP@50 · Sub-centimeter crack localization",
-      overview: "An automated aerial perception pipeline that detects, classifies, and segments pavement defects (cracks, potholes, rutting) and tracks their temporal deterioration across successive UAV flights.",
-      problem: "Traditional road surveys require manual ground inspection or expensive vehicle fleets. Aerial drone imagery suffers from shadow occlusions, road texture noise, and non-uniform lighting between seasonal flight passes.",
-      methodology: "Trained customized YOLOv8 segmentation architectures with specialized loss weighting for fine boundary delineations. Developed an automated orthomosaic co-registration routine using SIFT and rigid geometric transformations to perform pixel-level change vector analysis.",
-      results: [
-        "Achieved 94.2% mAP@50 on multi-class pavement distress benchmarks.",
-        "Graduated M.Sc. Photogrammetry with highest honors; published peer-reviewed research paper.",
-        "Delivered automated vector polygon shapefiles directly ingested into municipal GIS maintenance databases."
-      ],
-      techStack: ["Python", "PyTorch", "YOLOv8", "OpenCV", "GDAL", "QGIS"],
-      publicationOrContext: "M.Sc. Thesis & Research Paper, University of Tehran"
+      description: "Trained and evaluated customized YOLOv8 instance segmentation models to detect, classify, and track temporal deterioration of road cracks from multi-temporal UAV aerial imagery. Generates vector shapefiles directly for GIS maintenance systems.",
+      tags: ["Python", "PyTorch", "YOLOv8", "OpenCV", "QGIS", "GDAL"]
     },
     {
-      id: "uav-mine-photogrammetry",
-      title: "Autonomous UAV Photogrammetry & Open-Pit Mine Volumetrics",
-      subtitle: "Industrial 3D terrain modeling and monthly cut/fill volume calculation at Gol Gohar mine.",
-      category: "photogrammetry",
-      categoryLabel: "Photogrammetry & 3D",
+      title: "Autonomous UAV Photogrammetry & Mine Volumetrics",
+      context: "GEO-SUP · Industrial Deployment",
+      metric: "±1.8 cm GSD",
       image: "/images/uav_photogrammetry_mine.png",
-      imageCaption: "3D digital elevation model (DEM) and dense point cloud elevation gradient of open-pit mine excavation.",
-      hardware: "DJI Matrice 300 RTK + Sony RX1R II",
-      metric: "±1.8 cm GSD · 240k+ Meshes Reconstructed",
-      overview: "Full lifecycle UAV photogrammetric survey system delivering high-resolution digital surface models (DSM), slope stability monitoring, and automated volumetric calculation of extracted soil and mineral stockpiles.",
-      problem: "Mining pits feature harsh lighting, heavy dust, vertical bench faces, and dangerous steep slopes where manual total station surveying is slow (3–4 days) and poses significant personnel safety risks.",
-      methodology: "Formulated automated flight mission plans with 80% forward / 70% lateral overlaps. Synchronized dual-frequency GNSS PPK timestamps for direct georeferencing. Automated Structure-from-Motion (SfM) bundle adjustment and TIN differential surface subtraction in Python and CloudCompare.",
-      results: [
-        "Reduced monthly stockpile survey cycle from 4 days of ground surveying to 3 hours of drone acquisition and processing.",
-        "Maintained sub-2cm ground sampling distance (GSD) across hundreds of hectares.",
-        "Eliminated the need for human surveyors to climb active extraction pit benches."
-      ],
-      techStack: ["Python", "CloudCompare", "Metashape", "GDAL", "QGIS", "RTKLIB"],
-      publicationOrContext: "Deployed in Production at GEO-SUP"
+      description: "End-to-end UAV photogrammetry pipeline for Gol Gohar open-pit mine. Automates Structure-from-Motion (SfM/MVS) processing, dense point cloud generation in CloudCompare, and monthly cut/fill volume calculation, replacing days of dangerous ground surveying.",
+      tags: ["Python", "CloudCompare", "Metashape", "QGIS", "RTKLIB"]
     },
     {
-      id: "video-stabilization-jetson",
-      title: "Real-Time Video Stabilization & Optical Flow for UAV Payloads",
-      subtitle: "Embedded edge vision pipeline fusing MAVLink IMU telemetry and Lucas-Kanade optical flow.",
-      category: "vision",
-      categoryLabel: "Edge AI & Systems",
+      title: "Real-Time Video Stabilization for UAV Payloads",
+      context: "Embedded Edge Vision · NVIDIA Jetson",
+      metric: "42 FPS @ 1080p",
       image: "/images/video_stabilization_jetson.png",
-      imageCaption: "Corner feature tracking vectors and real-time stabilization HUD running on NVIDIA Jetson Xavier NX.",
-      hardware: "NVIDIA Jetson Xavier NX + Gimbal IMU",
-      metric: "42 FPS @ 1080p · <24ms Pipeline Latency",
-      overview: "High-throughput embedded vision software running directly onboard autonomous drones to filter high-frequency motor vibrations and wind turbulence for payload video feeds and downstream target tracking.",
-      problem: "Mechanical gimbals fail to cancel high-frequency jitter during rapid maneuvers. Software stabilization algorithms running on edge devices are constrained by a strict sub-15W power envelope and sub-30ms latency limits.",
-      methodology: "Combined real-time MAVLink serial quaternion attitude data with pyramidal Lucas-Kanade optical flow on Shi-Tomasi corners. Smoothed the calculated affine homography trajectory with a Kalman filter, executing image warping via OpenCV CUDA kernels on Jetson Xavier NX.",
-      results: [
-        "Achieved stable 42 FPS throughput at 1080p resolution within a 15W power budget.",
-        "Decreased angular video jitter by 85% compared to raw camera feed.",
-        "Provided clean, stable video frames to downstream YOLO target detection without dropping frames."
-      ],
-      techStack: ["C++", "OpenCV CUDA", "NVIDIA Jetson", "MAVLink", "GStreamer", "FFmpeg", "Linux"],
-      publicationOrContext: "GEO-SUP Autonomous Payload Integration"
+      description: "Embedded vision pipeline fusing serial MAVLink IMU telemetry with pyramidal Lucas-Kanade optical flow. Smoothed homography trajectories via Kalman filtering and applied CUDA warping on a Jetson Xavier NX to eliminate high-frequency flight jitter.",
+      tags: ["C++", "OpenCV CUDA", "Jetson Xavier", "MAVLink", "GStreamer"]
     },
     {
-      id: "geospatial-decision-support-patent",
-      title: "AI-Assisted Geospatial Decision Support System (Patent)",
-      subtitle: "Patented architecture for hydrological monitoring, watershed intelligence, and multi-source spatial fusion.",
-      category: "geospatial",
-      categoryLabel: "Patents & Geospatial AI",
-      image: "/images/patent_architecture.png",
-      imageCaption: "System architecture diagram of the AI-assisted geospatial decision support pipeline.",
-      metric: "Patent Application · Multi-Sensor Geospatial Fusion",
-      overview: "An end-to-end framework integrating remote sensing data cubes, ground hydrological telemetry, and deep learning algorithms to provide real-time decision support for watershed management and risk mitigation.",
-      problem: "Managing regional hydrological networks requires fusing heterogeneous datasets with differing temporal rhythms—daily satellite passes, real-time river gauges, and historical weather records—into coherent actionable alerts.",
-      methodology: "Designed a modular microservice architecture combining automated satellite ingestion, spatial raster algebra, and recurrent forecasting models. Built interactive map dashboards with multi-criteria spatial decision matrices.",
-      results: [
-        "Authored comprehensive patent application and technical architecture specification.",
-        "Demonstrated automated flood and drought risk scoring across regional river basins."
-      ],
-      techStack: ["Python", "GDAL", "PostGIS", "Remote Sensing", "System Architecture", "GeoServer"],
-      publicationOrContext: "Patent Application: AI-Assisted Geospatial Decision Support"
-    },
-    {
-      id: "lake-urmia-drought-forecasting",
       title: "Spatio-Temporal Drought Forecasting of Lake Urmia",
-      subtitle: "Deep learning time-series models on MODIS and Sentinel satellite Earth observation data.",
-      category: "geospatial",
-      categoryLabel: "Remote Sensing & AI",
+      context: "Research Paper · University of Tehran",
+      metric: "0.89 R²",
       image: "/images/lake_urmia_satellite.png",
-      imageCaption: "Satellite Earth observation multi-temporal change detection and water surface contraction of Lake Urmia.",
-      hardware: "Google Earth Engine + HPC Cluster",
-      metric: "0.89 R² Correlation · 10-Year Satellite Time Series",
-      overview: "Research project applying recurrent neural networks to satellite Earth observation time-series data to forecast monthly Standardized Precipitation Index (SPI) values and dry day counts over the shrinking Lake Urmia basin.",
-      problem: "Lake Urmia is one of the world's most severely impacted saline lakes. Traditional statistical hydrology models fail to capture non-linear climatic fluctuations and multi-scale seasonal lag effects.",
-      methodology: "Extracted 10+ years of satellite observations via Google Earth Engine API (MODIS NDVI, land surface temperature, CHIRPS precipitation). Deployed Wavelet-LSTM architectures to model long-term climatic memory and seasonal periodicity.",
-      results: [
-        "Achieved 0.89 R² correlation against ground meteorological station measurements.",
-        "Research paper submitted: 'Prediction of monthly dry days of Lake Urmia with Deep learning algorithms'.",
-        "Outperformed conventional ARIMA and multi-variable regression models by 24% lower RMSE."
-      ],
-      techStack: ["Python", "TensorFlow", "Google Earth Engine", "PyTorch", "GDAL", "Pandas"],
-      publicationOrContext: "University of Tehran Environmental Research"
+      description: "Harvested multi-decade Earth observation datasets (MODIS NDVI, land surface temperature, CHIRPS) via Google Earth Engine API. Deployed Wavelet-LSTM recurrent models to forecast monthly Standardized Precipitation Index (SPI) values over the Lake Urmia basin.",
+      tags: ["Python", "TensorFlow", "Google Earth Engine", "PyTorch", "GDAL"]
     },
     {
-      id: "gnss-ppk-logger",
+      title: "AI-Assisted Geospatial Decision Support System",
+      context: "Patent Application",
+      metric: "Patent Pending",
+      image: "/images/patent_architecture.png",
+      description: "Integrated framework combining remote sensing data cubes, ground hydrological telemetry, and deep learning algorithms to provide real-time decision support and flood/drought risk scoring for watershed management.",
+      tags: ["Python", "GDAL", "PostGIS", "GeoServer", "System Architecture"]
+    },
+    {
       title: "Embedded GNSS PPK Data Logger & Hardware Payload",
-      subtitle: "Centimeter-level UAV direct georeferencing without ground control points.",
-      category: "photogrammetry",
-      categoryLabel: "Embedded & Sensors",
+      context: "GEO-SUP Hardware Rig",
+      metric: "±1.5 cm accuracy",
       image: "/images/performance.png",
-      imageCaption: "Positioning residual plots and carrier phase fix metrics under kinematic flight conditions.",
-      hardware: "Raspberry Pi 4 + Ublox ZED-F9P + Camera Hotshoe",
-      metric: "±1.5 cm Kinematic Positioning Accuracy",
-      overview: "Custom hardware logging unit that records raw multi-band GNSS carrier phase measurements synchronized with camera shutter hot-shoe triggers for direct georeferencing of aerial survey photos.",
-      problem: "Setting up ground control points (GCPs) across rugged terrain is the most time-consuming bottleneck of drone surveys. Any microsecond lag between shutter opening and GNSS recording causes multi-meter errors at flight speeds.",
-      methodology: "Engineered optocoupler-isolated GPIO interrupt handling on Raspberry Pi to capture microsecond shutter triggers. Handled continuous UBX binary streaming to flash storage. Automated RTKLIB post-processing scripts to output centimeter-accurate camera centers.",
-      results: [
-        "Achieved ±1.5 cm positioning accuracy in kinematic flight tests.",
-        "Reduced field GCP requirement by 75% while meeting strict cadastre surveying standards.",
-        "Operated across 100+ operational mapping flights without a single missed trigger event."
-      ],
-      techStack: ["C++", "Python", "RTKLIB", "Raspberry Pi", "Linux", "Hardware Interrupts"],
-      publicationOrContext: "GEO-SUP Hardware Rig"
+      description: "Custom Raspberry Pi payload capturing microsecond camera hot-shoe trigger interrupts synchronized with raw multi-frequency GNSS carrier phase data. Post-processed via RTKLIB for direct drone georeferencing without ground control points.",
+      tags: ["C++", "Python", "RTKLIB", "Raspberry Pi", "Linux"]
     }
   ] as Project[],
 
@@ -216,65 +95,57 @@ export const PORTFOLIO_DATA = {
     {
       role: "Computer Vision Developer & Geospatial Systems Engineer",
       company: "GEO-SUP",
-      period: "Oct 2018 — Present",
+      period: "2018 — Present",
       location: "Tehran, Iran",
-      type: "Full-Time",
-      summary: "Leading technical development of UAV photogrammetry workflows, edge computer vision models, and spatial analytics systems for mining and infrastructure.",
-      points: [
-        "Designed and implemented UAV photogrammetry pipelines for mine excavation, terrain modeling, and cut/fill volume calculation using SfM/MVS.",
-        "Deployed YOLO-based object detection and vehicle tracking models on embedded NVIDIA Jetson platforms with TensorRT quantization.",
+      description: "Leading technical development of UAV photogrammetry workflows, edge computer vision models, and spatial analytics systems.",
+      highlights: [
+        "Implemented UAV photogrammetry pipelines for mine excavation and volume estimation using SfM/MVS.",
+        "Deployed YOLO detection and vehicle tracking models on embedded NVIDIA Jetson platforms with TensorRT.",
         "Engineered vision-based video stabilization systems fusing optical flow with IMU sensor feeds via MAVLink.",
-        "Developed custom QGIS plugins and automated Python/GDAL batch workflows to process multi-gigabyte point clouds and orthophotos.",
         "Supervised field operations, sensor calibration, and GNSS PPK/RTK base-rover setups across 150+ drone flights."
-      ],
-      technologies: ["Python", "C++", "PyTorch", "YOLOv8", "OpenCV", "QGIS", "NVIDIA Jetson", "SfM/MVS", "RTKLIB", "Docker"]
+      ]
     },
     {
       role: "Full Stack Web Developer & Geospatial Systems",
       company: "Navatel — SGAS",
-      period: "Feb 2021 — Jul 2022",
-      location: "Tehran, Iran (Remote)",
-      type: "Full-Time",
-      summary: "Developed scalable web applications, REST/WebSocket APIs, and interactive geospatial mapping tools for real-time asset monitoring.",
-      points: [
-        "Architected WebSocket-based microservices to broadcast live geospatial telemetries to concurrent client dashboards with sub-second latency.",
-        "Designed PostgreSQL/PostGIS spatial databases and optimized spatial indexing to achieve sub-20ms query responses on millions of coordinate points.",
-        "Collaborated with engineering teams using Docker, Git, Swagger API documentation, and agile Jira workflows."
-      ],
-      technologies: ["Node.js", "Python", "PostgreSQL / PostGIS", "WebSockets", "Docker", "Leaflet", "Swagger", "Redis"]
+      period: "2021 — 2022",
+      location: "Remote / Tehran, Iran",
+      description: "Developed scalable web applications, REST/WebSocket APIs, and interactive geospatial mapping tools for real-time asset monitoring.",
+      highlights: [
+        "Architected WebSocket-based microservices to broadcast live geospatial telemetries to client dashboards with sub-second latency.",
+        "Designed PostgreSQL/PostGIS spatial databases and optimized spatial indexing for millions of coordinate records.",
+        "Collaborated with cross-functional engineering teams using Docker, Git, Swagger API, and agile Jira workflows."
+      ]
     },
     {
       role: "Geospatial Research Assistant",
       company: "CRPLab — University of Tehran",
-      period: "May 2015 — Oct 2016",
+      period: "2015 — 2016",
       location: "Tehran, Iran",
-      type: "Academic Research",
-      summary: "Assisted in experimental data acquisition, close-range photogrammetry, and camera calibration for university research initiatives.",
-      points: [
+      description: "Supported academic research in camera calibration, close-range photogrammetry, and multi-view stereo modeling.",
+      highlights: [
         "Implemented camera calibration routines and epipolar geometry rectification for multi-view stereo experiments.",
-        "Conducted 3D close-range scanning, surface mesh generation, and architectural heritage modeling.",
-        "Supported field testing of early autonomous UAV platforms and ground control networks."
-      ],
-      technologies: ["MATLAB", "Photogrammetry", "Camera Calibration", "Multi-View Geometry", "Close-Range 3D"]
+        "Conducted 3D close-range scanning, surface mesh generation, and architectural heritage modeling."
+      ]
     }
-  ] as ExperienceItem[],
+  ] as Experience[],
 
   education: [
     {
       degree: "M.Sc. in Photogrammetry & Geospatial Engineering",
-      institution: "School of Surveying and Geospatial Engineering, University of Tehran",
+      school: "University of Tehran",
       period: "2021 — 2024",
       thesis: "Automatic Change Detection of Pavement Distress Using Deep Learning and UAV Imagery",
       supervisors: "Dr. Mahdi Hasanlou & Dr. Mohammad Saadat Seresht",
-      details: "Top engineering institution in Iran. Teaching Assistant for 'Advanced Digital Image Processing'. Coursework covered Computer Vision, Deep Learning in Earth Observation, Estimation Theory & Least Squares, and SAR Imagery Analysis."
+      notes: "Ranked #1 engineering university in Iran. Teaching Assistant for 'Advanced Digital Image Processing'."
     },
     {
       degree: "B.Sc. in Geospatial Engineering",
-      institution: "School of Surveying and Geospatial Engineering, University of Tehran",
+      school: "University of Tehran",
       period: "2015 — 2020",
       thesis: "Bundle Adjustment & High-Resolution Aerial Photogrammetry",
       supervisors: "School Faculty",
-      details: "Comprehensive mathematical and physical foundations in Remote Sensing, Geodesy, Photogrammetry, GNSS GPS, Cartography, and Hydrological Modeling."
+      notes: "Foundations in Remote Sensing, Geodesy, Photogrammetry, GNSS GPS, Cartography, and Hydrology."
     }
   ],
 
@@ -284,58 +155,35 @@ export const PORTFOLIO_DATA = {
       venue: "Peer-Reviewed Research Paper",
       year: "2024",
       type: "Paper",
-      authors: "Vahid Arastuian, M. Hasanlou, M. Saadat Seresht",
-      status: "Published",
-      description: "Presents an automated deep learning framework for multi-class distress segmentation and spatial change detection on road networks using low-altitude drone imagery."
+      description: "Deep learning framework for multi-class distress segmentation and spatial change detection on road networks using low-altitude drone imagery."
     },
     {
       title: "Prediction of Monthly Dry Days of Lake Urmia with Deep Learning Algorithms",
       venue: "Environmental Earth Observation & Hydrology",
       year: "2024",
       type: "Paper",
-      authors: "Vahid Arastuian, A. Malekian, M. Hasanlou",
-      status: "In Progress / Submitted",
-      description: "Applies recurrent LSTM models to long-term MODIS/Sentinel satellite datasets to forecast drought index fluctuations over Lake Urmia."
+      description: "Recurrent LSTM models applied to long-term MODIS/Sentinel satellite datasets to forecast drought index fluctuations over Lake Urmia."
     },
     {
       title: "AI-Assisted Geospatial Decision Support System for Watershed Intelligence",
       venue: "Patent Application",
       year: "2024",
       type: "Patent",
-      authors: "Vahid Arastuian et al.",
-      status: "Patent Pending",
-      description: "An integrated framework combining satellite remote sensing pipelines, edge AI inference, and real-time hydrological decision support."
+      description: "Integrated framework combining remote sensing data cubes, ground hydrological telemetry, and deep learning algorithms for real-time watershed monitoring."
     }
-  ] as PublicationItem[],
+  ] as Publication[],
+
+  skills: {
+    "Computer Vision & ML": ["PyTorch", "YOLOv8", "OpenCV", "CNNs", "Transformers", "CUDA", "TensorRT", "Lucas-Kanade Optical Flow"],
+    "Photogrammetry & GIS": ["SfM / MVS", "CloudCompare", "QGIS", "ArcGIS", "GDAL", "Rasterio", "RTKLIB (PPK/RTK)", "Google Earth Engine", "Metashape"],
+    "Languages & Systems": ["Python", "C / C++", "Linux", "Docker", "NVIDIA Jetson", "Raspberry Pi", "ROS", "MAVLink", "GStreamer"],
+    "Backend & WebGIS": ["PostgreSQL / PostGIS", "FastAPI", "Node.js", "WebSockets", "Redis", "Leaflet", "Git", "Java Spring Boot"]
+  },
 
   references: [
-    {
-      name: "Dr. Mahdi Hasanlou",
-      title: "Associate Professor",
-      institution: "University of Tehran",
-      email: "hasanlou@ut.ac.ir",
-      relation: "M.Sc. Thesis Co-Supervisor"
-    },
-    {
-      name: "Dr. Mohammad Saadat Seresht",
-      title: "Associate Professor",
-      institution: "University of Tehran",
-      email: "msaadat@ut.ac.ir",
-      relation: "M.Sc. Thesis Co-Supervisor"
-    },
-    {
-      name: "Dr. Farzaneh Dadrass Javan",
-      title: "Assistant Professor",
-      institution: "ITC, University of Twente (Netherlands)",
-      email: "f.dadrassjavan@utwente.nl",
-      relation: "Academic Collaborator / Recommender"
-    },
-    {
-      name: "Dr. Arash Malekian",
-      title: "Professor",
-      institution: "University of Tehran",
-      email: "malekian@ut.ac.ir",
-      relation: "Research Advisor (Lake Urmia Study)"
-    }
-  ] as ReferenceItem[]
+    { name: "Dr. Mahdi Hasanlou", title: "Associate Professor, University of Tehran", email: "hasanlou@ut.ac.ir" },
+    { name: "Dr. Mohammad Saadat Seresht", title: "Associate Professor, University of Tehran", email: "msaadat@ut.ac.ir" },
+    { name: "Dr. Farzaneh Dadrass Javan", title: "Assistant Professor, ITC University of Twente", email: "f.dadrassjavan@utwente.nl" },
+    { name: "Dr. Arash Malekian", title: "Professor, University of Tehran", email: "malekian@ut.ac.ir" }
+  ]
 };
